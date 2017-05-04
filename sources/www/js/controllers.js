@@ -65,7 +65,7 @@ angular.module('starter.controllers', [])
                             var country=value[count-1];
                             var state=value[count-2];
                             var city=value[count-3];
-                            console.log(x.innerHTML = "city name is: " + city);
+                            console.log(x.innerHTML = "city name is: " + state);
                         }
                         else  {
                             console.log(x.innerHTML = "address not found");
