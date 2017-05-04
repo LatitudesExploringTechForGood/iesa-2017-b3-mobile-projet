@@ -1,0 +1,46 @@
+<ion-view view-title="Invitation">
+  <ion-content>
+
+    <div ng-controller="InvitationCtrl">
+
+      <!--
+            <div ng-repeat="contact in contacts">
+              {{ contact.name.formatted }}
+            </div>
+
+            -->
+      <!--
+            <p>Total number of contacts: {{contacts.length}}</p>
+            -->
+
+      <!--
+      <ion-list>
+        <ion-item ng-repeat="contact in contacts">
+          {{contact.name}}
+        </ion-item>
+      </ion-list>
+      -->
+      <!--
+      <ion-list inset>
+        <button ion-item ng-repeat="contact in contacts" (click)="itemSelected(contact)">
+          {{contact.name}}
+        </button>
+      </ion-list>
+      -->
+
+      <div class="list">
+
+        <div ng-repeat="contact in contacts" class="item item-button-right">
+          {{ contact.name }}
+          <button class="button button-positive">
+            <i class="icon ion-email"></i>
+          </button>
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </ion-content>
+</ion-view>

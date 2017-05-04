@@ -1,0 +1,1 @@
+En solo la progression est géré avec un système de niveau représentés visuellement sur une "world map". PLus le joueur remporte de niveaus , plus il avance dans la "world map" et plus les schmilblick sont difficile. 

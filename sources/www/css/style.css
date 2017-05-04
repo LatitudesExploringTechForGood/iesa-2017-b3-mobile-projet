@@ -1,0 +1,61 @@
+/* Empty. Add your own CSS if you like */
+
+
+button{
+    border: 0;
+}
+
+/* ==========================================================================
+   Preloader
+   ========================================================================== */
+
+#preloader{
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #cd3333;
+    position: absolute;
+    z-index: 10000;
+}
+
+#btn-pass{
+    right: 0;
+    left: 0;
+    background-color: #f4981d;
+    bottom: 0;
+    color: #ffffff;
+    font-size:16px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    text-transform: uppercase;
+    padding: 25px 15px;
+}
+
+#profil-winner{
+    width: 100%;
+    text-align: center;
+    margin-top:200px;
+}
+
+.avart-pw{
+    width: 100px;
+    height: 100px;
+    border-radius: 300px;
+    margin-bottom:10px;
+}
+
+#profil-winner figcaption{
+    color: #ffffff;
+    font-size:20px;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+
+.pane, .view{
+    background-color: #dddddd;
+}

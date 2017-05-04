@@ -1,0 +1,2 @@
+- tableau de classement filtrage
+- classement avancée de campagne, on retrouve un classement par nombre de schmilblik
