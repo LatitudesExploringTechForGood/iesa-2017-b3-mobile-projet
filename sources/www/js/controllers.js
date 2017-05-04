@@ -21,6 +21,7 @@ angular.module('starter.controllers', [])
 
     .controller('GeolocationCtrl', ['$scope', '$ionicPlatform', '$location','Towns', function($scope, $ionicPlatform,$location,Towns) {
       $scope.towns=Towns.all();
+      $scope.state='';
         var x=document.getElementById("app");
         function getLocation(){
             if (navigator.geolocation){
@@ -34,16 +35,16 @@ angular.module('starter.controllers', [])
         function showError(error){
             switch(error.code){
                 case error.PERMISSION_DENIED:
-                    x.innerHTML="User denied the request for Geolocation."
+                    x.innerHTML="User denied the request for Geolocation.";
                     break;
                 case error.POSITION_UNAVAILABLE:
-                    x.innerHTML="Location information is unavailable."
+                    x.innerHTML="Location information is unavailable.";
                     break;
                 case error.TIMEOUT:
-                    x.innerHTML="The request to get user location timed out."
+                    x.innerHTML="The request to get user location timed out.";
                     break;
                 case error.UNKNOWN_ERROR:
-                    x.innerHTML="An unknown error occurred."
+                    x.innerHTML="An unknown error occurred.";
                     break;
             }
         }
@@ -52,7 +53,7 @@ angular.module('starter.controllers', [])
             var geocoder;
             geocoder = new google.maps.Geocoder();
             var latlng = new google.maps.LatLng(latitude, longitude);
-
+            var a = document.getElementById('geoloc');
             geocoder.geocode(
                 {'latLng': latlng},
                 function(results, status) {
@@ -60,19 +61,18 @@ angular.module('starter.controllers', [])
                         if (results[0]) {
                             var add= results[0].formatted_address ;
                             var  value=add.split(",");
-
                             var count=value.length;
-                            var country=value[count-1];
-                            var state=value[count-2];
-                            var city=value[count-3];
-                            console.log(x.innerHTML = "city name is: " + state);
+                            $scope.state=value[count-2];
+                            $scope.state=$scope.state.substr(7,8);
+                            console.log($scope.state);
+                            a.innerHTML='<a class="button button-full button-positive" href="#/tab/geolocation/'+$scope.state+'">geolocalisation Users</a>';
                         }
                         else  {
-                            console.log(x.innerHTML = "address not found");
+                            x.innerHTML = "address not found";
                         }
                     }
                     else {
-                        console.log(x.innerHTML = "Geocoder failed due to: " + status);
+                        x.innerHTML = "Geocoder failed due to: " + status;
                     }
                 }
             );
@@ -97,17 +97,6 @@ angular.module('starter.controllers', [])
                 enableFriends: true
             };
 
-            /*$scope.selectPeopleInTown = function (town) {
-                $scope.peopleInTown=[];
-                $scope.peoples.forEach(function (item) {
-                    if (item.ville==town){
-                        $scope.peopleInTown.push(item);
-                    }
-                });
-                console.log($scope.peopleInTown);
-                $location.path('templates/list-in-city.html');
-
-            };*/
     }])
     
     .controller('GeolocationDetailCtrl',function ($scope, $stateParams, Peoples) {

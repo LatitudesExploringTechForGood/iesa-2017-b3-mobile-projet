@@ -52,9 +52,9 @@ angular.module('starter.services', [])
 
     // Some fake testing data
     var towns = [
-        {name:'paris',lat:'41',lon:'54'},
-        {name:'marseille',lat:'32',lon:'45'},
-        {name:'lille',lat:'-34',lon:'09'}
+        {name:'Paris',lat:'41',lon:'54'},
+        {name:'Marseille',lat:'32',lon:'45'},
+        {name:'Lille',lat:'-34',lon:'09'}
         ];
 
     return {
@@ -69,27 +69,27 @@ angular.module('starter.services', [])
     var peoples = [{
         id: 0,
         name: 'Ben Sparrow',
-        town: 'paris',
+        town: 'Paris',
         face: 'img/ben.png'
     }, {
         id: 1,
         name: 'Max Lynx',
-        town: 'paris',
+        town: 'Paris',
         face: 'img/max.png'
     }, {
         id: 2,
         name: 'Adam Bradleyson',
-        town: 'marseille',
+        town: 'Marseille',
         face: 'img/adam.jpg'
     }, {
         id: 3,
         name: 'Perry Governor',
-        town: 'lille',
+        town: 'Lille',
         face: 'img/perry.png'
     }, {
         id: 4,
         name: 'Mike Harrington',
-        town: 'marseille',
+        town: 'Marseille',
         face: 'img/mike.png'
     }];
 
