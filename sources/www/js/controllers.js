@@ -21,62 +21,82 @@ angular.module('starter.controllers', [])
 
     .controller('GeolocationCtrl', ['$scope', '$ionicPlatform', '$location','Towns', function($scope, $ionicPlatform,$location,Towns) {
       $scope.towns=Towns.all();
-
-            /*let getAddress =function (latitude, longitude) {
-                console.log('get adresse');
-                return new Promise(function (resolve, reject) {
-                    let request = new XMLHttpRequest();
-                    let method = 'GET';
-                    let url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&sensor=true';
-                    let async = true;
-
-                    request.open(method, url, async);
-                    request.onreadystatechange = function () {
-                        if (request.readyState == 4) {
-                            if (request.status == 200) {
-                                let data = JSON.parse(request.responseText);
-                                let address = data.results[0];
-                                console.log('adresse'+adress);
-                                resolve(address);
-                            }
-                            else {
-                                reject(request.status);
-                            }
-                        }
-                    };
-                    request.send();
-                });
-            };
-            let onSuccess = function(position) {
-                let lat= position.coords.latitude;
-                let long = position.coords.longitude;
-                console.log('lat'+lat);
-                getAddress(lat, long);
-            };*/
-
-            // onError Callback receives a PositionError object
-            //
-            /*function onError(error) {
-                alert('code: '    + error.code    + '\n' +
-                    'message: ' + error.message + '\n');
+      $scope.state='';
+        var x=document.getElementById("app");
+        function getLocation(){
+            if (navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(showPosition,showError);
             }
+            else{
+                x.innerHTML="Geolocation is not supported by this browser.";
+            }
+        }
 
-            navigator.geolocation.getCurrentPosition(onSuccess, onError);
-            $scope.settings = {
-                enableFriends: true
-            };*/
+        function showError(error){
+            switch(error.code){
+                case error.PERMISSION_DENIED:
+                    x.innerHTML="User denied the request for Geolocation.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    x.innerHTML="Location information is unavailable.";
+                    break;
+                case error.TIMEOUT:
+                    x.innerHTML="The request to get user location timed out.";
+                    break;
+                case error.UNKNOWN_ERROR:
+                    x.innerHTML="An unknown error occurred.";
+                    break;
+            }
+        }
 
-            /*$scope.selectPeopleInTown = function (town) {
-                $scope.peopleInTown=[];
-                $scope.peoples.forEach(function (item) {
-                    if (item.ville==town){
-                        $scope.peopleInTown.push(item);
+        function displayLocation(latitude,longitude){
+            var geocoder;
+            geocoder = new google.maps.Geocoder();
+            var latlng = new google.maps.LatLng(latitude, longitude);
+            var a = document.getElementById('geoloc');
+            geocoder.geocode(
+                {'latLng': latlng},
+                function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[0]) {
+                            var add= results[0].formatted_address ;
+                            var  value=add.split(",");
+                            var count=value.length;
+                            $scope.state=value[count-2];
+                            $scope.state=$scope.state.substr(7,8);
+                            console.log($scope.state);
+                            a.innerHTML='<a class="button button-full button-positive" href="#/tab/geolocation/'+$scope.state+'">geolocalisation Users</a>';
+                        }
+                        else  {
+                            x.innerHTML = "address not found";
+                        }
                     }
-                });
-                console.log($scope.peopleInTown);
-                $location.path('templates/list-in-city.html');
+                    else {
+                        x.innerHTML = "Geocoder failed due to: " + status;
+                    }
+                }
+            );
+        }
 
-            };*/
+        var onSuccess = function(position) {
+            var lat= position.coords.latitude;
+            var long = position.coords.longitude;
+            console.log('lat'+lat);
+            displayLocation(lat,long);
+        };
+
+        // onError Callback receives a PositionError object
+        //
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' +
+                'message: ' + error.message + '\n');
+        }
+
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        $scope.settings = {
+            enableFriends: true
+        };
+
     }])
     
     .controller('GeolocationDetailCtrl',function ($scope, $stateParams, Peoples) {
