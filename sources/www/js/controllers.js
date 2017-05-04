@@ -22,6 +22,12 @@ angular.module('starter.controllers', [])
     .controller('GeolocationCtrl', ['$scope', '$ionicPlatform', '$location','Towns', function($scope, $ionicPlatform,$location,Towns) {
       $scope.towns=Towns.all();
       $scope.state='';
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+
+
+
+        }
         var x=document.getElementById("app");
         function getLocation(){
             if (navigator.geolocation){
