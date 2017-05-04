@@ -78,24 +78,24 @@ angular.module('starter.controllers', [])
             );
         }
 
-            var onSuccess = function(position) {
-                var lat= position.coords.latitude;
-                var long = position.coords.longitude;
-                console.log('lat'+lat);
-                displayLocation(lat,long);
-            };
+        var onSuccess = function(position) {
+            var lat= position.coords.latitude;
+            var long = position.coords.longitude;
+            console.log('lat'+lat);
+            displayLocation(lat,long);
+        };
 
-            // onError Callback receives a PositionError object
-            //
-            function onError(error) {
-                alert('code: '    + error.code    + '\n' +
-                    'message: ' + error.message + '\n');
-            }
+        // onError Callback receives a PositionError object
+        //
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' +
+                'message: ' + error.message + '\n');
+        }
 
-            navigator.geolocation.getCurrentPosition(onSuccess, onError);
-            $scope.settings = {
-                enableFriends: true
-            };
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        $scope.settings = {
+            enableFriends: true
+        };
 
     }])
     
