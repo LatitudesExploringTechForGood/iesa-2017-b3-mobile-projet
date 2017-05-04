@@ -21,42 +21,73 @@ angular.module('starter.controllers', [])
 
     .controller('GeolocationCtrl', ['$scope', '$ionicPlatform', '$location','Towns', function($scope, $ionicPlatform,$location,Towns) {
       $scope.towns=Towns.all();
+        var x=document.getElementById("app");
+        function getLocation(){
+            if (navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(showPosition,showError);
+            }
+            else{
+                x.innerHTML="Geolocation is not supported by this browser.";
+            }
+        }
 
-            /*let getAddress =function (latitude, longitude) {
-                console.log('get adresse');
-                return new Promise(function (resolve, reject) {
-                    let request = new XMLHttpRequest();
-                    let method = 'GET';
-                    let url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&sensor=true';
-                    let async = true;
+        function showError(error){
+            switch(error.code){
+                case error.PERMISSION_DENIED:
+                    x.innerHTML="User denied the request for Geolocation."
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    x.innerHTML="Location information is unavailable."
+                    break;
+                case error.TIMEOUT:
+                    x.innerHTML="The request to get user location timed out."
+                    break;
+                case error.UNKNOWN_ERROR:
+                    x.innerHTML="An unknown error occurred."
+                    break;
+            }
+        }
 
-                    request.open(method, url, async);
-                    request.onreadystatechange = function () {
-                        if (request.readyState == 4) {
-                            if (request.status == 200) {
-                                let data = JSON.parse(request.responseText);
-                                let address = data.results[0];
-                                console.log('adresse'+adress);
-                                resolve(address);
-                            }
-                            else {
-                                reject(request.status);
-                            }
+        function displayLocation(latitude,longitude){
+            var geocoder;
+            geocoder = new google.maps.Geocoder();
+            var latlng = new google.maps.LatLng(latitude, longitude);
+
+            geocoder.geocode(
+                {'latLng': latlng},
+                function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[0]) {
+                            var add= results[0].formatted_address ;
+                            var  value=add.split(",");
+
+                            var count=value.length;
+                            var country=value[count-1];
+                            var state=value[count-2];
+                            var city=value[count-3];
+                            console.log(x.innerHTML = "city name is: " + city);
                         }
-                    };
-                    request.send();
-                });
-            };
-            let onSuccess = function(position) {
-                let lat= position.coords.latitude;
-                let long = position.coords.longitude;
+                        else  {
+                            console.log(x.innerHTML = "address not found");
+                        }
+                    }
+                    else {
+                        console.log(x.innerHTML = "Geocoder failed due to: " + status);
+                    }
+                }
+            );
+        }
+
+            var onSuccess = function(position) {
+                var lat= position.coords.latitude;
+                var long = position.coords.longitude;
                 console.log('lat'+lat);
-                getAddress(lat, long);
-            };*/
+                displayLocation(lat,long);
+            };
 
             // onError Callback receives a PositionError object
             //
-            /*function onError(error) {
+            function onError(error) {
                 alert('code: '    + error.code    + '\n' +
                     'message: ' + error.message + '\n');
             }
@@ -64,7 +95,7 @@ angular.module('starter.controllers', [])
             navigator.geolocation.getCurrentPosition(onSuccess, onError);
             $scope.settings = {
                 enableFriends: true
-            };*/
+            };
 
             /*$scope.selectPeopleInTown = function (town) {
                 $scope.peopleInTown=[];
