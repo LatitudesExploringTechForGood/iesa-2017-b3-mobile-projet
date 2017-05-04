@@ -2,11 +2,11 @@
 
 ## Membres
 
-* Edouard
-* Julien
-* Ambroise
-* Leo
-* Lilian
+* Ambroise Deyna
+* Edouard Thieffry
+* Julien Grelet
+* Leo Estlimbaum
+* Lilian Tourillon
 
 ## La video de présentation
 
