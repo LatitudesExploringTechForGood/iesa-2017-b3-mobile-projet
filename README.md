@@ -13,6 +13,13 @@
    - /project/j3/actions.*
    - /report/report.pdf
 
+## Tags manquants
+
+   - day-0
+   - day-1
+   - day-2
+   - day-3
+
 
 ## Membres
 
