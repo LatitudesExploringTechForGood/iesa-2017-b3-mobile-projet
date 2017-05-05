@@ -7,6 +7,7 @@
   <author email="you@example.com" href="http://example.com/">
       Your Name Here
     </author>
+<<<<<<< HEAD
   <content src="index.html"/>
   <access origin="*"/>
   <preference name="webviewbounce" value="false"/>
@@ -55,3 +56,34 @@
   </platform>
   <icon src="resources/ios/icon/icon-small@3x.png"/>
 </widget>
+=======
+    <content src="index.html" />
+    <access origin="*" />
+    <preference name="webviewbounce" value="false" />
+    <preference name="UIWebViewBounce" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="ShowSplashScreenSpinner" value="false"/>
+    <preference name="SplashScreenDelay" value="2000" />
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="BackupWebStorage" value="none" />
+    <preference name="SplashScreen" value="screen" />
+    <feature name="StatusBar">
+        <param name="ios-package" onload="true" value="CDVStatusBar" />
+    </feature>
+    <platform name="ios">
+        <!--
+        <icon  src="resources/icon.png" width="100%" />
+        -->
+        <splash src="resources/screen/ios/Default@2x~universal~anyany.png" />
+    </platform>
+    <platform name="android">
+        <!--
+        <icon src="resources/icon.png" width="100%" />
+        -->
+        <splash src="resources/screen/android/Default@2x~universal~anyany.png" />
+    </platform>
+    <plugin name="cordova-plugin-contacts" spec="~2.3.0">
+        <variable name="CONTACTS_USAGE_DESCRIPTION" value=" " />
+    </plugin>
+</widget>
+>>>>>>> 31d1d643c74aa5e11a69ff745abc09ad994db9ff
