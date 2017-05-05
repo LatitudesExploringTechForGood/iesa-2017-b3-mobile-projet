@@ -1,5 +1,19 @@
 # La Schmilclick
 
+## Fichiers manquants ou vides fin J3
+
+   - /gamification/04_classement.md [0 ko]
+   - /gamification/06_feedback.md [0 ko]
+   - /gamification/07_progressif.md [0 ko]
+   - /gamification/09_realisations_badges.md [0 ko]
+   - /gamification/11_dons.md [0 ko]
+   - /gamification/13_graph_social.md [0 ko]
+   - /report/cordova.md [0 ko]
+   - /project/j3/facts.*
+   - /project/j3/actions.*
+   - /report/report.pdf
+
+
 ## Membres
 
 * Ambroise Deyna
@@ -16,32 +30,3 @@
 
 * https://drive.google.com/file/d/0B84c_Tf5ziDNc0JmUjF5QjZUYkU/view?usp=sharing
 
-## Fichiers à remplir
-
-- /product/03-*
-- /product/04-*
-- /product/05-*
-- /product/06-*
-- /gamification/01_points.md
-- /gamification/02_niveaux.md
-- /gamification/03_recompenses.md
-- /gamification/04_classement.md
-- /gamification/05_progression.md
-- /gamification/06_feedback.md
-- /gamification/07_progressif.md
-- /gamification/08_quetes_defis.md
-- /gamification/09_realisations_badges.md
-- /gamification/10_marchandises.md
-- /gamification/11_dons.md
-- /gamification/12_avatar.md
-- /gamification/13_graph_social.md
-- /gamification/14_scaffolding.md
-- /gamification/15_hasard.md
-- /gamification/16_immersion.md
-- /gamification/17_asynchronie.md
-- /sources/config.xml
-- /report/cordova.md
-- /report/agile.md
-- /project/problems.md
-- /project/j2/facts.*
-- /project/j2/actions.*
