@@ -19,90 +19,106 @@ angular.module('starter.controllers', [])
 
 
 
-    .controller('GeolocationCtrl', ['$scope', '$ionicPlatform', '$location','Towns', function($scope, $ionicPlatform,$location,Towns) {
-      $scope.towns=Towns.all();
-      $scope.state='';
-        document.addEventListener("deviceready", onDeviceReady, false);
-        function onDeviceReady() {
+    .controller('GeolocationCtrl', ['$scope', '$ionicPlatform', '$location','Towns', '$cordovaGeolocation', function($scope, $ionicPlatform,$location,Towns, $cordovaGeolocation) {
+
+        $ionicPlatform.ready(function() {
 
 
+            var opts = {timeout: 10000, enableHighAccuracy: false};
 
-        }
-        var x=document.getElementById("app");
-        function getLocation(){
-            if (navigator.geolocation){
-                navigator.geolocation.getCurrentPosition(showPosition,showError);
-            }
-            else{
-                x.innerHTML="Geolocation is not supported by this browser.";
-            }
-        }
+            $cordovaGeolocation.getCurrentPosition(opts).then(function(position){
+                displayLocation(position.coords.latitude,position.coords.longitude);
 
-        function showError(error){
-            switch(error.code){
-                case error.PERMISSION_DENIED:
-                    x.innerHTML="User denied the request for Geolocation.";
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    x.innerHTML="Location information is unavailable.";
-                    break;
-                case error.TIMEOUT:
-                    x.innerHTML="The request to get user location timed out.";
-                    break;
-                case error.UNKNOWN_ERROR:
-                    x.innerHTML="An unknown error occurred.";
-                    break;
-            }
-        }
 
-        function displayLocation(latitude,longitude){
-            var geocoder;
-            geocoder = new google.maps.Geocoder();
-            var latlng = new google.maps.LatLng(latitude, longitude);
-            var a = document.getElementById('geoloc');
-            geocoder.geocode(
-                {'latLng': latlng},
-                function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        if (results[0]) {
-                            var add= results[0].formatted_address ;
-                            var  value=add.split(",");
-                            var count=value.length;
-                            $scope.state=value[count-2];
-                            $scope.state=$scope.state.substr(7,8);
-                            console.log($scope.state);
-                            a.innerHTML='<a class="button button-full button-positive" href="#/tab/geolocation/'+$scope.state+'">geolocalisation Users</a>';
-                        }
-                        else  {
-                            x.innerHTML = "address not found";
-                        }
-                    }
-                    else {
-                        x.innerHTML = "Geocoder failed due to: " + status;
-                    }
+            }, function(err){
+                onError(err);
+                alert(err);
+            });
+
+
+            $scope.towns=Towns.all();
+            $scope.state='';
+
+            var x=document.getElementById("app");
+            function getLocation(){
+                if ($cordovaGeolocation){
+                    $cordovaGeolocation.getCurrentPosition(opts).then(function(position){
+                        onSuccess(position);
+                        alert(position);
+
+                    }, function(err){
+                        onError(err);
+                        alert(err);
+                    });
                 }
-            );
-        }
+                else{
+                    x.innerHTML="Geolocation is not supported by this browser.";
+                }
+            }
 
-        var onSuccess = function(position) {
-            var lat= position.coords.latitude;
-            var long = position.coords.longitude;
-            console.log('lat'+lat);
-            displayLocation(lat,long);
-        };
+            function showError(error){
+                switch(error.code){
+                    case error.PERMISSION_DENIED:
+                        x.innerHTML="User denied the request for Geolocation.";
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        x.innerHTML="Location information is unavailable.";
+                        break;
+                    case error.TIMEOUT:
+                        x.innerHTML="The request to get user location timed out.";
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        x.innerHTML="An unknown error occurred.";
+                        break;
+                }
+            }
 
-        // onError Callback receives a PositionError object
-        //
-        function onError(error) {
-            alert('code: '    + error.code    + '\n' +
-                'message: ' + error.message + '\n');
-        }
+            function displayLocation(latitude,longitude){
+                alert(latitude,longitude);
+                var geocoder;
+                geocoder = new google.maps.Geocoder();
+                var latlng = new google.maps.LatLng(latitude, longitude);
+                var a = document.getElementById('geoloc');
+                geocoder.geocode(
+                    {'latLng': latlng},
+                    function(results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            if (results[0]) {
+                                var add= results[0].formatted_address ;
+                                var  value=add.split(",");
+                                var count=value.length;
+                                $scope.state=value[count-2];
+                                $scope.state=$scope.state.substr(7,8);
+                                console.log('state'+$scope.state);
+                                a.innerHTML='<a class="button button-full button-positive" href="#/tab/geolocation/'+$scope.state+'">geolocalisation Users</a>';
+                            }
+                            else  {
+                                x.innerHTML = "address not found";
+                            }
+                        }
+                        else {
+                            x.innerHTML = "Geocoder failed due to: " + status;
+                        }
+                    }
+                );
+            }
 
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
-        $scope.settings = {
-            enableFriends: true
-        };
+            var onSuccess = function(position) {
+                var lat= position.coords.latitude;
+                var long = position.coords.longitude;
+                console.log('lat'+lat);
+                displayLocation(lat,long);
+            };
 
+            // onError Callback receives a PositionError object
+            //
+            function onError(error) {
+                alert('code: '    + error.code    + '\n' +
+                    'message: ' + error.message + '\n');
+            }
+
+
+        });
     }])
     
     .controller('GeolocationDetailCtrl',function ($scope, $stateParams, Peoples) {
