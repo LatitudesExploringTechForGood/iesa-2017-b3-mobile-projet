@@ -1,3 +1,11 @@
+# Guide d'installation
+
+* cloner le git repos
+* run "npm install" pour installer les dépendances Node
+* run "ionic platform add ios" + "ionic platform add android" pour installer la plateforme de votre choix
+* run "ionic restore --plugin" pour installer les plugins cordova / ionic 
+* lancer l'émulateur depuis XCODE ( ios ) ou ANDROID STUDIO ( android )
+
 # La Schmilclick
 
 ## Fichiers manquants ou vides fin J3
